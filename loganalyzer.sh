@@ -25,22 +25,24 @@ total_requests(){
 }
 
 unique_visitors(){
-    unique=$(awk "{print $1}" "$log" | sort | uniq | wc -l)
+    unique=$(awk '{print $1}' "$log" | sort | uniq | wc -l)
     echo "Unique Visitors : $unique"
 }
 
 status_codes(){
     awk "{
         first_digit = subtr($9, 1, 1)
-        if (( first_digit == "2")) {c2++}
-        elif (( first_digit == "3")) {c3++}
-        elif (( first_digit == "4")) {c4++}
-        elif (( first_digit == "5")) {c5++}
+        if ( first_digit == "2") {c2++}
+        else if ( first_digit == "3") {c3++}
+        else if ( first_digit == "4") {c4++}
+        else if (first_digit == "5") {c5++}
     }
     END {
         #if the a count is empty, print 0 instead of leaving it blank
-        printf "2xx / 3xx %d / %d\n", c2, c3
-        printf "2xx / 3xx %d / %d\n", c2, c3
+        printf "2xx: %d\n", c2
+        printf "3xx: %d\n", c3
+        printf "4xx: %d\n", c4
+        printf "5xx: %d\n", c5
     }"
     "$log"
 }
