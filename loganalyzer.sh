@@ -44,6 +44,21 @@ status_codes(){
     }'
     "$log"
 }
+
+top_pages(){
+    echo "5 top pages"
+    awk '{print $7}' $log | sort | uniq -c | sort -rn | head -5
+}
+
+top_ips(){
+    echo "5 top ip pages"
+    awk '{print $1}' $log | sort | uniq -c | sort -rn | head -5
+}
+
+top_404_pages() {
+    echo "5 top 404 pages"
+    awk '{print $7}' $log | sort | uniq -c | sort -rn | head -5
+}
 echo "=============================================="
 echo "Log Report: $log"
 echo "=============================================="
@@ -51,3 +66,6 @@ echo "=============================================="
 total_requests
 unique_visitors
 status_codes
+top_pages
+top_ips
+top_404_pages
