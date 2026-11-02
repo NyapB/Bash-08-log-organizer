@@ -45,6 +45,16 @@ status_codes(){
     "$log"
 }
 
+data_sent() {
+    awk '
+        {sum += }
+    END {
+        mb = sum / 1048576
+        printf "Data sent %.1f MB", mb
+    }'
+    "$log"
+}
+
 top_pages(){
     echo "5 top pages"
     awk '{print $7}' $log | sort | uniq -c | sort -rn | head -5
