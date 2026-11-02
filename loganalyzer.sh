@@ -48,28 +48,28 @@ status_codes(){
 }
 
 data_sent() {
-    awk "
+    awk '
         {sum += }
     END {
         mb = sum / 1048576
         printf "Data sent %.1f MB", mb
-    }"
+    }'
     "$log"
 }
 
 top_pages(){
     echo "5 top pages"
-    awk "{print $7}" $log | sort | uniq -c | sort -rn | head -5
+    awk '{print $7}' "$log"| sort | uniq -c | sort -rn | head -5
 }
 
 top_ips(){
     echo "5 top ip pages"
-    awk "{print $1}" $log | sort | uniq -c | sort -rn | head -5
+    awk '{print $1}' "$log" | sort | uniq -c | sort -rn | head -5
 }
 
 top_404_pages() {
     echo "5 top 404 pages"
-    awk "{print $7}" $log | sort | uniq -c | sort -rn | head -5
+    awk '{print $7}' "$log" | sort | uniq -c | sort -rn | head -5
 }
 echo "=============================================="
 echo "Log Report: $log"
