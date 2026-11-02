@@ -75,11 +75,11 @@ echo "=============================================="
 
 total_requests
 unique_visitors
-status_codes
+status_codes "$@"
 
 echo ""
-top_pages
+top_pages "$@"
 echo ""
-top_ips
+top_ips "$@"
 echo ""
-top_404_pages
+top_404_pages "$@"
