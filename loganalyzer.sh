@@ -18,6 +18,20 @@ if [[ ! -s "$1" ]]; then
     exit 1
 fi
 
+#functions
+total_requests(){
+    total=$(wc -l < "$log")
+    echo "Total requests: $total"
+}
+
+unique_visitors(){
+    unique=$(awk '{print $1}' "$log" | sort | uniq | wc -l)
+    echo "Unique Visitors : $unique"
+}
+
 echo "=============================================="
 echo "Log Report: $log"
 echo "=============================================="
+
+total_requests
+unique_visitors
