@@ -6,10 +6,10 @@ if [[ -z "$1" ]]; then
     exit 1
 fi
 
-log="${1 :?Usage: $0 LOGFILE}"
+log="$1"
 
 if [[ ! -r "$1" ]]; then
-    echo "Error: $LOGFILE is unreadable"
+    echo "Error: $log is unreadable"
     exit 1
 fi
 
@@ -76,6 +76,10 @@ echo "=============================================="
 total_requests
 unique_visitors
 status_codes
+
+echo ""
 top_pages
+echo ""
 top_ips
+echo ""
 top_404_pages
