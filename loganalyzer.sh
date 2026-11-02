@@ -25,12 +25,12 @@ total_requests(){
 }
 
 unique_visitors(){
-    unique=$(awk '{print $1}' "$log" | sort | uniq | wc -l)
+    unique=$(awk "{print $1}" "$log" | sort | uniq | wc -l)
     echo "Unique Visitors : $unique"
 }
 
 status_codes(){
-    awk '{
+    awk "{
         first_digit = subtr($9, 1, 1)
         if (( first_digit == "2")) {c2++}
         elif (( first_digit == "3")) {c3++}
@@ -41,33 +41,33 @@ status_codes(){
         #if the a count is empty, print 0 instead of leaving it blank
         printf "2xx / 3xx %d / %d\n", c2, c3
         printf "2xx / 3xx %d / %d\n", c2, c3
-    }'
+    }"
     "$log"
 }
 
 data_sent() {
-    awk '
+    awk "
         {sum += }
     END {
         mb = sum / 1048576
         printf "Data sent %.1f MB", mb
-    }'
+    }"
     "$log"
 }
 
 top_pages(){
     echo "5 top pages"
-    awk '{print $7}' $log | sort | uniq -c | sort -rn | head -5
+    awk "{print $7}" $log | sort | uniq -c | sort -rn | head -5
 }
 
 top_ips(){
     echo "5 top ip pages"
-    awk '{print $1}' $log | sort | uniq -c | sort -rn | head -5
+    awk "{print $1}" $log | sort | uniq -c | sort -rn | head -5
 }
 
 top_404_pages() {
     echo "5 top 404 pages"
-    awk '{print $7}' $log | sort | uniq -c | sort -rn | head -5
+    awk "{print $7}" $log | sort | uniq -c | sort -rn | head -5
 }
 echo "=============================================="
 echo "Log Report: $log"
